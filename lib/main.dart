@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_flutter/common/rest-client/rest_client_imp.dart';
+// import 'package:movies_flutter/provider/provider.dart';
 
-import 'model/model.dart';
+// import 'common/common.dart';
 
 void main() {
   runApp(MainApp());
@@ -27,14 +27,9 @@ class MainApp extends StatelessWidget {
         body: Center(
           child: GestureDetector(
             onTap: () async {
-              final RestClientImp restClientImp = RestClientImp(dio: dio);
-              final RestClientResponse response = await restClientImp.get<Map<String, dynamic>>(
-                route: '/3/genre/movie/list',
-                queryParameters: {
-                  'api_key': '62e48dcafbb216bec99239663b6eba93',
-                },
-              );
-              print(response.data);
+              // final RestClient restClientImp = RestClientImp(dio: dio);
+              // final MovieProvider movieProvider = MovieProviderImp(client: restClientImp);
+              // final genres = await movieProvider.getGenre();
             },
             child: Container(
               color: Colors.red,

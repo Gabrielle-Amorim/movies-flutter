@@ -1,41 +1,47 @@
 import 'package:dio/dio.dart';
 
+import 'rest_client.dart';
 import '../../model/model.dart';
 
-class RestClientImp {
+class RestClientImp implements RestClient {
   RestClientImp({
     required this.dio,
   });
 
   final Dio dio;
 
+  @override
   Future<RestClientResponse<T>> get<T>({
     required String route,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      final Response response = await dio.get<T>(
+      final Response<T> response = await dio.get<T>(
         route,
         queryParameters: queryParameters,
       );
-      return RestClientResponse<T>(
-        data: response.data,
-        statusCode: response.statusCode,
-        statusMessage: response.statusMessage,
-      );
+      return _response<T>(response);
     } on DioException catch (e) {
-      throw RestClientException(
-        message: e.message,
-        statusCode: e.response?.statusCode,
-        error: e.error,
-        response: RestClientResponse(
-          data: e.response?.data,
-          statusCode: e.response?.statusCode,
-          statusMessage: e.response?.statusMessage,
-        ),
-      );
+      throw _exception(e);
     } catch (_) {
       rethrow;
     }
   }
+
+  RestClientResponse<T> _response<T>(Response<T> response) => RestClientResponse<T>(
+        data: response.data,
+        statusCode: response.statusCode,
+        statusMessage: response.statusMessage,
+      );
+
+  RestClientException _exception(DioException error) => RestClientException(
+        message: error.message,
+        statusCode: error.response?.statusCode,
+        error: error.error,
+        response: RestClientResponse(
+          data: error.response?.data,
+          statusCode: error.response?.statusCode,
+          statusMessage: error.response?.statusMessage,
+        ),
+      );
 }
