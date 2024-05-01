@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
       title: 'Movies Flutter',
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
-      initialRoute: AppRoutes.main,
+      initialRoute: AppRoutes.welcome,
     );
     // return const MaterialApp(
     // home: MainScreen(),

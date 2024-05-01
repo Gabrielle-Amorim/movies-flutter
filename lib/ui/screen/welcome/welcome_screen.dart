@@ -4,8 +4,8 @@ import 'package:movies_flutter/routes/routes.dart';
 import '../../components/components.dart';
 import '../../theme/colors.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({
     super.key,
   });
 

@@ -20,6 +20,18 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: MFColors.darkPurple,
       ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(
+              'Filtre por gênero',
+              style: TextStyle(
+                color: MFColors.white,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

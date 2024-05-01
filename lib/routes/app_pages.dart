@@ -8,8 +8,8 @@ class AppPages {
 
   static final List<GetPage<dynamic>> routes = [
     GetPage(
-      name: AppRoutes.main,
-      page: () => const MainScreen(),
+      name: AppRoutes.welcome,
+      page: () => const WelcomeScreen(),
     ),
     GetPage(
       name: AppRoutes.home,
