@@ -5,6 +5,7 @@ import '../../../theme/colors.dart';
 class MfButton extends StatelessWidget {
   const MfButton({
     required this.label,
+    required this.onTap,
     this.backgroundColor,
     super.key,
     this.width,
@@ -13,10 +14,12 @@ class MfButton extends StatelessWidget {
   final String label;
   final Color? backgroundColor;
   final double? width;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor ?? MFColors.mediumPurple,
