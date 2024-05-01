@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_flutter/routes/routes.dart';
 
 import '../../components/components.dart';
 import '../../theme/colors.dart';
@@ -17,7 +18,8 @@ class MainScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const MfButton(
+            MfButton(
+              onTap: () {},
               width: 257,
               label: 'Login / Cadastre-se',
             ),
@@ -25,6 +27,7 @@ class MainScreen extends StatelessWidget {
               height: 16,
             ),
             MfButton(
+              onTap: AppNavigator.to.home,
               width: 257,
               label: 'Acessar como visitante',
               backgroundColor: MFColors.ligthPurple,
