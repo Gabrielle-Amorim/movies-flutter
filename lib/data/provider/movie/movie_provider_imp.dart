@@ -1,6 +1,7 @@
-import 'movie_provider.dart';
-import '../../common/common.dart';
-import '../../model/model.dart';
+import '../../rest-client/interface/rest_client.dart';
+import '../../rest-client/model/model.dart';
+import '../interface/interface.dart';
+import '../../../domain/model/model.dart';
 
 class MovieProviderImp extends MovieProvider {
   MovieProviderImp({

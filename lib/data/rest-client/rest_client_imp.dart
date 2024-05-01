@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import 'rest_client.dart';
-import '../../model/model.dart';
+import './interface/rest_client.dart';
+import './model/model.dart';
 
 class RestClientImp implements RestClient {
   RestClientImp({

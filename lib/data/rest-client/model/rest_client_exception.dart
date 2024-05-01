@@ -1,4 +1,4 @@
-import 'package:movies_flutter/model/model.dart';
+import './rest_client_response.dart';
 
 class RestClientException implements Exception {
   RestClientException({

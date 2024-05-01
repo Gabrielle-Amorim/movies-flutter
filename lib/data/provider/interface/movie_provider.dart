@@ -1,4 +1,4 @@
-import '../../model/model.dart';
+import '../../../domain/model/model.dart';
 
 abstract class MovieProvider {
   Future<List<GenreModel>> getGenre();

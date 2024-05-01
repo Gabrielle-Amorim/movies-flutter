@@ -1,25 +1,22 @@
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_flutter/ui/screen/screen.dart';
-// import 'package:movies_flutter/provider/provider.dart';
-
-// import 'common/common.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
+  const MainApp({super.key});
 
-  final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://api.themoviedb.org',
-      contentType: 'application/json',
-      connectTimeout: const Duration(milliseconds: 10000),
-      receiveTimeout: const Duration(milliseconds: 15000),
-    ),
-  );
+  // final Dio dio = Dio(
+  //   BaseOptions(
+  //     baseUrl: 'https://api.themoviedb.org',
+  //     contentType: 'application/json',
+  //     connectTimeout: const Duration(milliseconds: 10000),
+  //     receiveTimeout: const Duration(milliseconds: 15000),
+  //   ),
+  // );
 
   @override
   Widget build(BuildContext context) {
