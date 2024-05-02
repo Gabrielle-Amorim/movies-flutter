@@ -7,18 +7,21 @@ class MfChip extends StatelessWidget {
   factory MfChip.selected({
     required String label,
     required VoidCallback onTap,
+    Key? key,
   }) {
     return MfChip._(
       label: label,
       bgColor: MFColors.white,
       textColor: MFColors.darkPurple,
       onTap: onTap,
+      key: key,
     );
   }
 
   factory MfChip.unselected({
     required String label,
     required VoidCallback onTap,
+    Key? key,
   }) {
     return MfChip._(
       label: label,
@@ -26,6 +29,7 @@ class MfChip extends StatelessWidget {
       textColor: MFColors.white,
       borderColor: MFColors.white,
       onTap: onTap,
+      key: key,
     );
   }
 
@@ -35,6 +39,7 @@ class MfChip extends StatelessWidget {
     required this.textColor,
     this.borderColor,
     this.onTap,
+    super.key,
   });
 
   final String label;
@@ -46,6 +51,7 @@ class MfChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: Key('GestureDetector01-$key'),
       onTap: onTap,
       child: Container(
         constraints: const BoxConstraints(

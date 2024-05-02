@@ -20,7 +20,9 @@ class MfButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      key: Key("InkWell01-$key"),
       child: Container(
+        key: Key("Container01-${key.toString()}"),
         decoration: BoxDecoration(
           color: backgroundColor ?? MFColors.mediumPurple,
           borderRadius: BorderRadius.circular(8),
