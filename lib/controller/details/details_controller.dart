@@ -23,6 +23,6 @@ class DetailsController extends DetailsVariables {
 
   Future<void> _getDetails() async {
     final MovieDetailsModel response = await movieService.getDetails(id: movieId);
-    print(response);
+    _movie.value = response;
   }
 }

@@ -1,3 +1,4 @@
+import '../../../config.dart';
 import '../model.dart';
 
 class MovieDetailsModel {
@@ -77,7 +78,7 @@ class MovieDetailsModel {
         originalTitle: map['original_title'] ?? '',
         overview: map['overview'] ?? '',
         popularity: (map['popularity'] ?? '').toString(),
-        posterPath: map['poster_path'] ?? '',
+        posterPath: map['poster_path'] != null ? '${AppConfig.imagePath}${map['poster_path']}' : '',
         companies: (map['production_companies'] as List? ?? [])
             .map(
               (e) => CompanyModel.fromMap(
@@ -94,6 +95,17 @@ class MovieDetailsModel {
         voteAverage: (map['vote_average'] ?? '').toString(),
         voteCount: (map['vote_count'] ?? '').toString(),
       );
+
+  String getGenre() {
+    String genre = '';
+    for (var element in genres) {
+      genre += element.name;
+      if (!(element == genres[genres.length - 1])) {
+        genre += ' / ';
+      }
+    }
+    return genre;
+  }
 
   final bool adult;
   final String backdropPath;

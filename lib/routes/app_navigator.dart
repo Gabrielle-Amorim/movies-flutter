@@ -3,6 +3,8 @@ import 'package:movies_flutter/routes/routes.dart';
 
 abstract class AppNavigator {
   static final to = _AppNavigatorTo();
+
+  static void back() => Get.back();
 }
 
 class _AppNavigatorTo<T> {
