@@ -4,6 +4,11 @@ class GenreModel {
     required this.name,
   });
 
+  factory GenreModel.empty() => GenreModel(
+        id: 0,
+        name: '',
+      );
+
   factory GenreModel.fromMap(Map<String, dynamic> map) => GenreModel(
         id: (map['id'] ?? ''),
         name: (map['name'] ?? ''),
