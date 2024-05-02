@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../controller/controller.dart';
 import '../../components/components.dart';
 import '../../theme/colors.dart';
+import '../../util/util.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
@@ -53,7 +54,6 @@ class HomeScreen extends GetView<HomeController> {
                     shrinkWrap: true,
                     itemBuilder: (_, i) {
                       final genre = controller.genres[i];
-
                       return Obx(
                         () => Visibility(
                           visible: controller.filteredGenre == genre.id,
@@ -86,6 +86,29 @@ class HomeScreen extends GetView<HomeController> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
+              const SizedBox(
+                height: 16,
+              ),
+              Obx(
+                () => SizedBox(
+                  height: 300,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.popularMovies.length,
+                    itemBuilder: (_, index) {
+                      final movie = controller.popularMovies[index];
+                      return MfImageCard(
+                        image: movie.posterPath,
+                        text: movie.title,
+                        secondaryText: MfDateFormat.dateToString(
+                          movie.releaseDate,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
             ],
           ),
         ),

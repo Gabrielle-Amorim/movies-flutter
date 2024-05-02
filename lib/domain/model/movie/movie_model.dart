@@ -1,3 +1,5 @@
+import 'package:movies_flutter/config.dart';
+
 class MovieModel {
   MovieModel({
     required this.adult,
@@ -26,7 +28,7 @@ class MovieModel {
         overview: '',
         popularity: '',
         posterPath: '',
-        releaseDate: '',
+        releaseDate: DateTime.now(),
         title: '',
         video: false,
         voteAverage: '',
@@ -43,8 +45,8 @@ class MovieModel {
       originalTitle: map['original_title'] ?? '',
       overview: map['overview'] ?? '',
       popularity: (map['popularity'] ?? '').toString(),
-      posterPath: map['poster_path'] ?? '',
-      releaseDate: map['release_date'] ?? '',
+      posterPath: map['poster_path'] != null ? '${AppConfig.imagePath}${map['poster_path']}' : '',
+      releaseDate: map['release_date'] != null ? DateTime.parse(map['release_date']) : DateTime.now(),
       title: map['title'] ?? '',
       video: map['video'] ?? false,
       voteAverage: (map['vote_average'] ?? '').toString(),
@@ -61,7 +63,7 @@ class MovieModel {
   final String overview;
   final String popularity;
   final String posterPath;
-  final String releaseDate;
+  final DateTime releaseDate;
   final String title;
   final bool video;
   final String voteAverage;
