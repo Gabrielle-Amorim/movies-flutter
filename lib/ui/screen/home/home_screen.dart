@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../controller/controller.dart';
+import '../../components/components.dart';
 import '../../theme/colors.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
 
   @override
@@ -11,25 +14,68 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: MFColors.darkPurple,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
-          'Olá, Visitante!',
-          style: TextStyle(
-            color: MFColors.white,
-            fontWeight: FontWeight.w700,
+        title: Obx(
+          () => Text(
+            'Olá, ${controller.userLogged}!',
+            style: TextStyle(
+              color: MFColors.white,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
         backgroundColor: MFColors.darkPurple,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Text(
-              'Filtre por gênero',
-              style: TextStyle(
-                color: MFColors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ).copyWith(
+            top: 24,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Filtre por gênero',
+                style: TextStyle(
+                  color: MFColors.white,
+                  fontSize: 16,
+                ),
               ),
-            )
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                  height: 35,
+                  child: Obx(
+                    () => ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (_, i) {
+                        final genre = controller.genres[i];
+
+                        return Obx(
+                          () => Visibility(
+                            visible: controller.filteredGenre == genre.id,
+                            replacement: MfChip.unselected(
+                              label: genre.name,
+                              onTap: () => controller.filterByGenre(genre.id),
+                            ),
+                            child: MfChip.selected(
+                              label: genre.name,
+                              onTap: () => controller.filterByGenre(0),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (_, i) => const SizedBox(
+                        width: 8,
+                      ),
+                      itemCount: controller.genres.length,
+                    ),
+                  )),
+            ],
+          ),
         ),
       ),
     );

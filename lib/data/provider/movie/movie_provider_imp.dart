@@ -1,3 +1,5 @@
+import 'package:movies_flutter/config.dart';
+
 import '../../rest-client/interface/rest_client.dart';
 import '../../rest-client/model/model.dart';
 import '../interface/interface.dart';
@@ -15,8 +17,8 @@ class MovieProviderImp extends MovieProvider {
       final RestClientResponse response = await client.get<Map<String, dynamic>>(
         route: '/3/genre/movie/list',
         queryParameters: {
-          'api_key': '62e48dcafbb216bec99239663b6eba93',
-          'language': 'pt-BR',
+          'api_key': AppConfig.apiKey,
+          'language': AppConfig.language,
         },
       );
       return ((response.data['genres'] ?? []) as List<dynamic>)

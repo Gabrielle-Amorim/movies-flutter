@@ -11,15 +11,6 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  // final Dio dio = Dio(
-  //   BaseOptions(
-  //     baseUrl: 'https://api.themoviedb.org',
-  //     contentType: 'application/json',
-  //     connectTimeout: const Duration(milliseconds: 10000),
-  //     receiveTimeout: const Duration(milliseconds: 15000),
-  //   ),
-  // );
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
