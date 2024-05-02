@@ -46,34 +46,46 @@ class HomeScreen extends GetView<HomeController> {
                 height: 16,
               ),
               SizedBox(
-                  height: 35,
-                  child: Obx(
-                    () => ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemBuilder: (_, i) {
-                        final genre = controller.genres[i];
+                height: 35,
+                child: Obx(
+                  () => ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (_, i) {
+                      final genre = controller.genres[i];
 
-                        return Obx(
-                          () => Visibility(
-                            visible: controller.filteredGenre == genre.id,
-                            replacement: MfChip.unselected(
-                              label: genre.name,
-                              onTap: () => controller.filterByGenre(genre.id),
-                            ),
-                            child: MfChip.selected(
-                              label: genre.name,
-                              onTap: () => controller.filterByGenre(0),
-                            ),
+                      return Obx(
+                        () => Visibility(
+                          visible: controller.filteredGenre == genre.id,
+                          replacement: MfChip.unselected(
+                            label: genre.name,
+                            onTap: () => controller.filterByGenre(genre.id),
                           ),
-                        );
-                      },
-                      separatorBuilder: (_, i) => const SizedBox(
-                        width: 8,
-                      ),
-                      itemCount: controller.genres.length,
+                          child: MfChip.selected(
+                            label: genre.name,
+                            onTap: () => controller.filterByGenre(0),
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (_, i) => const SizedBox(
+                      width: 8,
                     ),
-                  )),
+                    itemCount: controller.genres.length,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Text(
+                'POPULARES',
+                style: TextStyle(
+                  color: MFColors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ],
           ),
         ),

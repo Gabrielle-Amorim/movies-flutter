@@ -16,4 +16,6 @@ class HomeVariables extends GetxController {
 
   final _genres = <GenreModel>[].obs;
   final _filteredGenre = 0.obs;
+
+  final _popularMovies = <MovieModel>[].obs;
 }

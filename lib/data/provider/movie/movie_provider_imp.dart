@@ -30,4 +30,24 @@ class MovieProviderImp extends MovieProvider {
       rethrow;
     }
   }
+
+  @override
+  Future<List<MovieModel>> popularMovies() async {
+    try {
+      final RestClientResponse response = await client.get<Map<String, dynamic>>(
+        route: '/3/movie/popular',
+        queryParameters: {
+          'api_key': AppConfig.apiKey,
+          'language': AppConfig.language,
+        },
+      );
+      return ((response.data['results'] ?? []) as List<dynamic>)
+          .map(
+            (map) => MovieModel.fromMap(map),
+          )
+          .toList();
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

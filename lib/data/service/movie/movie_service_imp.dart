@@ -1,6 +1,5 @@
 import '../../../domain/model/model.dart';
 import '../../data.dart';
-import '../interface/interface.dart';
 
 class MovieServiceImp extends MovieService {
   MovieServiceImp({
@@ -10,4 +9,7 @@ class MovieServiceImp extends MovieService {
 
   @override
   Future<List<GenreModel>> getGenre() => movieProvider.getGenre();
+
+  @override
+  Future<List<MovieModel>> popularMovies() => movieProvider.popularMovies();
 }
