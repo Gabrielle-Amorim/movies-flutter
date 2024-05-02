@@ -1,4 +1,3 @@
-// import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,24 +18,5 @@ class MainApp extends StatelessWidget {
       getPages: AppPages.routes,
       initialRoute: AppRoutes.welcome,
     );
-    // return const MaterialApp(
-    // home: MainScreen(),
-    // home: Scaffold(
-    //   body: Center(
-    //     child: GestureDetector(
-    //       onTap: () async {
-    //         // final RestClient restClientImp = RestClientImp(dio: dio);
-    //         // final MovieProvider movieProvider = MovieProviderImp(client: restClientImp);
-    //         // final genres = await movieProvider.getGenre();
-    //       },
-    //       child: Container(
-    //         color: Colors.red,
-    //         width: 50,
-    //         height: 50,
-    //       ),
-    //     ),
-    //   ),
-    // ),
-    // );
   }
 }
