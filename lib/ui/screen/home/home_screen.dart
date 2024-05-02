@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movies_flutter/routes/routes.dart';
 
 import '../../../controller/controller.dart';
 import '../../components/components.dart';
@@ -99,6 +100,7 @@ class HomeScreen extends GetView<HomeController> {
                     itemBuilder: (_, index) {
                       final movie = controller.popularMovies[index];
                       return MfImageCard(
+                        onTap: () => AppNavigator.to.details(id: movie.id),
                         image: movie.posterPath,
                         text: movie.title,
                         secondaryText: MfDateFormat.dateToString(
