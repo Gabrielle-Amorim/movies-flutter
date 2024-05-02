@@ -12,6 +12,7 @@ class HomeController extends HomeVariables {
   int get filteredGenre => _filteredGenre.value;
 
   List<MovieModel> get popularMovies => _popularMovies.toList();
+  List<MovieModel> get filteredMovies => _filteredMovies.toList();
 
   @override
   void onInit() {
@@ -49,7 +50,18 @@ class HomeController extends HomeVariables {
     _popularMovies.assignAll(response);
   }
 
-  void filterByGenre(int id) {
+  Future<void> filterByGenre(int id) async {
+    if (id == 0) {
+      _filteredGenre.value = id;
+      _filteredMovies.assignAll([]);
+      return;
+    }
     _filteredGenre.value = id;
+    final List<MovieModel> response = await movieService.filterByGenre(
+      ids: [
+        id,
+      ],
+    );
+    _filteredMovies.assignAll(response);
   }
 }

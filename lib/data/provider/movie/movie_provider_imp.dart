@@ -68,4 +68,32 @@ class MovieProviderImp extends MovieProvider {
       rethrow;
     }
   }
+
+  @override
+  Future<List<MovieModel>> filterByGenre({required List<int> ids}) async {
+    try {
+      String genres = '';
+      for (int element in ids) {
+        genres += element.toString();
+        if (!(element == ids[ids.length - 1])) {
+          genres += ',';
+        }
+      }
+      final RestClientResponse response = await client.get<Map<String, dynamic>>(
+        route: '/3/discover/movie',
+        queryParameters: {
+          'api_key': AppConfig.apiKey,
+          'language': AppConfig.language,
+          'with_genres': genres,
+        },
+      );
+      return ((response.data['results'] ?? []) as List<dynamic>)
+          .map(
+            (map) => MovieModel.fromMap(map),
+          )
+          .toList();
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

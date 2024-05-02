@@ -96,9 +96,16 @@ class HomeScreen extends GetView<HomeController> {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.popularMovies.length,
+                    itemCount: controller.filteredMovies.isNotEmpty
+                        ? controller.filteredMovies.length
+                        : controller.popularMovies.length,
                     itemBuilder: (_, index) {
-                      final movie = controller.popularMovies[index];
+                      late dynamic movie;
+                      if (controller.filteredMovies.isNotEmpty) {
+                        movie = controller.filteredMovies[index];
+                      } else {
+                        movie = controller.popularMovies[index];
+                      }
                       return MfImageCard(
                         onTap: () => AppNavigator.to.details(id: movie.id),
                         image: movie.posterPath,

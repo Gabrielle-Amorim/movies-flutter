@@ -6,4 +6,6 @@ abstract class MovieService {
   Future<List<MovieModel>> popularMovies();
 
   Future<MovieDetailsModel> getDetails({required String id});
+
+  Future<List<MovieModel>> filterByGenre({required List<int> ids});
 }

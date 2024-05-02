@@ -15,4 +15,7 @@ class MovieServiceImp extends MovieService {
 
   @override
   Future<MovieDetailsModel> getDetails({required String id}) => movieProvider.getDetails(id: id);
+
+  @override
+  Future<List<MovieModel>> filterByGenre({required List<int> ids}) => movieProvider.filterByGenre(ids: ids);
 }
