@@ -1,1 +1,2 @@
-export 'movie/movie.dart';
+export './interface/interface.dart';
+export './movie/movie.dart';
