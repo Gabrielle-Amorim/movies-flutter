@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
-import 'package:movies_flutter/data/data.dart';
 
 import '../../controller/controller.dart';
+import '../../data/data.dart';
 import '../../data/rest-client/interface/rest_client.dart';
 
-class HomeBinding implements Bindings {
+class DetailsBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<HomeController>(
-      () => HomeController(
+    Get.lazyPut<DetailsController>(
+      () => DetailsController(
         movieService: MovieServiceImp(
           movieProvider: MovieProviderImp(
             client: Get.find<RestClient>(),

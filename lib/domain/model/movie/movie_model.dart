@@ -39,7 +39,11 @@ class MovieModel {
     return MovieModel(
       adult: map['adult'] ?? false,
       backdropPath: map['backdrop_path'] ?? '',
-      genreIds: [],
+      genreIds: (map['genre_ids'] as List<dynamic>? ?? [])
+          .map(
+            (e) => e as int,
+          )
+          .toList(),
       id: (map['id'] ?? '').toString(),
       originalLanguage: map['original_language'] ?? '',
       originalTitle: map['original_title'] ?? '',

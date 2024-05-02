@@ -22,5 +22,12 @@ class AppPages {
         HomeBinding(),
       ],
     ),
+    GetPage(
+      name: AppRoutes.details,
+      page: () => const DetailsScreen(),
+      bindings: [
+        DetailsBinding(),
+      ],
+    ),
   ];
 }

@@ -50,4 +50,22 @@ class MovieProviderImp extends MovieProvider {
       rethrow;
     }
   }
+
+  @override
+  Future<MovieDetailsModel> getDetails({
+    required String id,
+  }) async {
+    try {
+      final RestClientResponse response = await client.get<Map<String, dynamic>>(
+        route: '/3/movie/$id',
+        queryParameters: {
+          'api_key': AppConfig.apiKey,
+          'language': AppConfig.language,
+        },
+      );
+      return MovieDetailsModel.fromMap(response.data);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
