@@ -12,6 +12,8 @@ class DetailsVariables extends GetxController {
 
   final MovieService movieService;
 
+  final _loading = false.obs;
+
   final _movieId = ''.obs;
   final _movie = MovieDetailsModel.empty().obs;
 }

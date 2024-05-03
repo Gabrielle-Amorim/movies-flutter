@@ -6,8 +6,8 @@ class DetailsController extends DetailsVariables {
   });
 
   String get movieId => _movieId.value;
-
   MovieDetailsModel get movie => _movie.value;
+  bool get loading => _loading.value;
 
   @override
   void onInit() {
@@ -22,7 +22,14 @@ class DetailsController extends DetailsVariables {
   }
 
   Future<void> _getDetails() async {
-    final MovieDetailsModel response = await movieService.getDetails(id: movieId);
-    _movie.value = response;
+    try {
+      _loading.value = true;
+      final MovieDetailsModel response = await movieService.getDetails(id: movieId);
+      _movie.value = response;
+    } catch (_) {
+      // TODO(Gabi): add error snack
+    } finally {
+      _loading.value = false;
+    }
   }
 }

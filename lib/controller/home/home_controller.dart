@@ -26,23 +26,24 @@ class HomeController extends HomeVariables {
   }
 
   Future<void> _init() async {
-    await Future.wait(
-      [
-        _getGenre(),
-        _getPopularMovies(),
-      ],
-    );
-  }
-
-  Future<void> _getGenre() async {
     try {
       _loading.value = true;
-      final List<GenreModel> response = await movieService.getGenre();
-      _genres.assignAll(response);
+      await Future.wait(
+        [
+          _getGenre(),
+          _getPopularMovies(),
+        ],
+      );
     } catch (_) {
     } finally {
       _loading.value = false;
     }
+  }
+
+  Future<void> _getGenre() async {
+    _loading.value = true;
+    final List<GenreModel> response = await movieService.getGenre();
+    _genres.assignAll(response);
   }
 
   Future<void> _getPopularMovies() async {
@@ -51,17 +52,23 @@ class HomeController extends HomeVariables {
   }
 
   Future<void> filterByGenre(int id) async {
-    if (id == 0) {
+    try {
+      _loading.value = true;
+      if (id == 0) {
+        _filteredGenre.value = id;
+        _filteredMovies.assignAll([]);
+        return;
+      }
       _filteredGenre.value = id;
-      _filteredMovies.assignAll([]);
-      return;
+      final List<MovieModel> response = await movieService.filterByGenre(
+        ids: [
+          id,
+        ],
+      );
+      _filteredMovies.assignAll(response);
+    } catch (_) {
+    } finally {
+      _loading.value = false;
     }
-    _filteredGenre.value = id;
-    final List<MovieModel> response = await movieService.filterByGenre(
-      ids: [
-        id,
-      ],
-    );
-    _filteredMovies.assignAll(response);
   }
 }

@@ -91,30 +91,34 @@ class HomeScreen extends GetView<HomeController> {
                 height: 16,
               ),
               Obx(
-                () => SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.filteredMovies.isNotEmpty
-                        ? controller.filteredMovies.length
-                        : controller.popularMovies.length,
-                    itemBuilder: (_, index) {
-                      late dynamic movie;
-                      if (controller.filteredMovies.isNotEmpty) {
-                        movie = controller.filteredMovies[index];
-                      } else {
-                        movie = controller.popularMovies[index];
-                      }
-                      return MfImageCard(
-                        onTap: () => AppNavigator.to.details(id: movie.id),
-                        image: movie.posterPath,
-                        text: movie.title,
-                        secondaryText: MfDateFormat.dateToString(
-                          movie.releaseDate,
-                        ),
-                      );
-                    },
+                () => Visibility(
+                  visible: !controller.loading,
+                  replacement: const MfLoading(),
+                  child: SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.filteredMovies.isNotEmpty
+                          ? controller.filteredMovies.length
+                          : controller.popularMovies.length,
+                      itemBuilder: (_, index) {
+                        late dynamic movie;
+                        if (controller.filteredMovies.isNotEmpty) {
+                          movie = controller.filteredMovies[index];
+                        } else {
+                          movie = controller.popularMovies[index];
+                        }
+                        return MfImageCard(
+                          onTap: () => AppNavigator.to.details(id: movie.id),
+                          image: movie.posterPath,
+                          text: movie.title,
+                          secondaryText: MfDateFormat.dateToString(
+                            movie.releaseDate,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               )
