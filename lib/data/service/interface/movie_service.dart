@@ -3,7 +3,9 @@ import '../../../domain/model/model.dart';
 abstract class MovieService {
   Future<List<GenreModel>> getGenre();
 
-  Future<List<MovieModel>> popularMovies();
+  Future<List<MovieModel>> popularMovies({
+    required int page,
+  });
 
   Future<MovieDetailsModel> getDetails({required String id});
 

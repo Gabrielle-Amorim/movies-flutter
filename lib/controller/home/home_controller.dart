@@ -18,6 +18,7 @@ class HomeController extends HomeVariables {
   void onInit() {
     _isUserLogged();
     _init();
+    _addListenerMovieList();
     super.onInit();
   }
 
@@ -28,12 +29,7 @@ class HomeController extends HomeVariables {
   Future<void> _init() async {
     try {
       _loading.value = true;
-      await Future.wait(
-        [
-          _getGenre(),
-          _getPopularMovies(),
-        ],
-      );
+      await _getGenre();
     } catch (_) {
     } finally {
       _loading.value = false;
@@ -44,11 +40,6 @@ class HomeController extends HomeVariables {
     _loading.value = true;
     final List<GenreModel> response = await movieService.getGenre();
     _genres.assignAll(response);
-  }
-
-  Future<void> _getPopularMovies() async {
-    final List<MovieModel> response = await movieService.popularMovies();
-    _popularMovies.assignAll(response);
   }
 
   Future<void> filterByGenre(int id) async {
@@ -70,5 +61,33 @@ class HomeController extends HomeVariables {
     } finally {
       _loading.value = false;
     }
+  }
+
+  Future<void> _getPopularMovies({
+    required int page,
+  }) async {
+    try {
+      final response = await movieService.popularMovies(
+        page: page,
+      );
+      final isLastPage = response.length < 20;
+      if (isLastPage) {
+        movieListController.appendLastPage(response);
+      } else {
+        movieListController.appendPage(response, page + 1);
+      }
+    } catch (error) {
+      movieListController.error = error;
+    }
+  }
+
+  Future<void> _addListenerMovieList() async {
+    movieListController.addPageRequestListener(
+      (page) {
+        _getPopularMovies(
+          page: page,
+        );
+      },
+    );
   }
 }

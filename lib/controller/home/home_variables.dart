@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../data/data.dart';
 import '../../domain/model/model.dart';
@@ -19,4 +20,6 @@ class HomeVariables extends GetxController {
 
   final _popularMovies = <MovieModel>[].obs;
   final _filteredMovies = <MovieModel>[].obs;
+
+  PagingController<int, MovieModel> movieListController = PagingController(firstPageKey: 1);
 }

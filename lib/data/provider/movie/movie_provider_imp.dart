@@ -32,13 +32,16 @@ class MovieProviderImp extends MovieProvider {
   }
 
   @override
-  Future<List<MovieModel>> popularMovies() async {
+  Future<List<MovieModel>> popularMovies({
+    required int page,
+  }) async {
     try {
       final RestClientResponse response = await client.get<Map<String, dynamic>>(
         route: '/3/movie/popular',
         queryParameters: {
           'api_key': AppConfig.apiKey,
           'language': AppConfig.language,
+          'page': page,
         },
       );
       return ((response.data['results'] ?? []) as List<dynamic>)

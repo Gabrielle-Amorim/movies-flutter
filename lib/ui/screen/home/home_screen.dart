@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:movies_flutter/domain/model/movie/movie_model.dart';
 import 'package:movies_flutter/routes/routes.dart';
 
 import '../../../controller/controller.dart';
@@ -91,37 +93,58 @@ class HomeScreen extends GetView<HomeController> {
                 height: 16,
               ),
               Obx(
-                () => Visibility(
-                  visible: !controller.loading,
-                  replacement: const MfLoading(),
-                  child: SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                      shrinkWrap: true,
+                () => SizedBox(
+                  height: 300,
+                  child: Visibility(
+                    visible: controller.filteredMovies.isEmpty,
+                    replacement: SizedBox(
+                      height: 300,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.filteredMovies.length,
+                        itemBuilder: (_, index) {
+                          final movie = controller.filteredMovies[index];
+                          return MfImageCard(
+                            onTap: () => AppNavigator.to.details(id: movie.id),
+                            image: movie.posterPath,
+                            text: movie.title,
+                            secondaryText: MfDateFormat.dateToString(
+                              movie.releaseDate,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    child: PagedListView<int, MovieModel>.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: controller.filteredMovies.isNotEmpty
-                          ? controller.filteredMovies.length
-                          : controller.popularMovies.length,
-                      itemBuilder: (_, index) {
-                        late dynamic movie;
-                        if (controller.filteredMovies.isNotEmpty) {
-                          movie = controller.filteredMovies[index];
-                        } else {
-                          movie = controller.popularMovies[index];
-                        }
-                        return MfImageCard(
-                          onTap: () => AppNavigator.to.details(id: movie.id),
-                          image: movie.posterPath,
-                          text: movie.title,
-                          secondaryText: MfDateFormat.dateToString(
-                            movie.releaseDate,
+                      pagingController: controller.movieListController,
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 8,
+                      ),
+                      builderDelegate: PagedChildBuilderDelegate<MovieModel>(
+                        firstPageErrorIndicatorBuilder: (context) => const Padding(
+                          padding: EdgeInsets.only(top: 16),
+                          child: Center(
+                            child: Text('Ocorreu um erro ao carregar os filmes!'),
                           ),
-                        );
-                      },
+                        ),
+                        firstPageProgressIndicatorBuilder: (context) => const MfLoading(),
+                        itemBuilder: (context, data, index) {
+                          return MfImageCard(
+                            onTap: () => AppNavigator.to.details(id: data.id),
+                            image: data.posterPath,
+                            text: data.title,
+                            secondaryText: MfDateFormat.dateToString(
+                              data.releaseDate,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
