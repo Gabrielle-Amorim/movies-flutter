@@ -47,16 +47,16 @@ void main() {
         "should call correct provider method popularMovies",
         () async {
           when(
-            () => movieService.popularMovies(),
+            () => movieService.popularMovies(page: 1),
           ).thenAnswer(
             (invocation) async => [
               MovieModel.empty(),
               MovieModel.empty(),
             ],
           );
-          await movieService.popularMovies();
+          await movieService.popularMovies(page: 1);
           verify(
-            () => movieService.popularMovies(),
+            () => movieService.popularMovies(page: 1),
           ).called(1);
         },
       );
