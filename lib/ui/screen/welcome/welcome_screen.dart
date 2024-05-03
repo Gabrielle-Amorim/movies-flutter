@@ -19,7 +19,14 @@ class WelcomeScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             MfButton(
-              onTap: () {},
+              onTap: () {
+                const snackBar = SnackBar(
+                  content: Text(
+                    'Em desenvolvimento',
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
               width: 257,
               label: 'Login / Cadastre-se',
             ),
