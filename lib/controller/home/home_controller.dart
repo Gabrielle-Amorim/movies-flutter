@@ -18,6 +18,7 @@ class HomeController extends HomeVariables {
   void onInit() {
     _isUserLogged();
     init();
+    _addListenerMovieList();
     super.onInit();
   }
 
@@ -26,15 +27,6 @@ class HomeController extends HomeVariables {
   }
 
   Future<void> init() async {
-    await Future.wait(
-      [
-        getGenre(),
-        getPopularMovies(),
-      ],
-    );
-  }
-
-  Future<void> getGenre() async {
     try {
       _loading.value = true;
       await _getGenre();
@@ -44,9 +36,10 @@ class HomeController extends HomeVariables {
     }
   }
 
-  Future<void> getPopularMovies() async {
-    final List<MovieModel> response = await movieService.popularMovies();
-    _popularMovies.assignAll(response);
+  Future<void> _getGenre() async {
+    _loading.value = true;
+    final List<GenreModel> response = await movieService.getGenre();
+    _genres.assignAll(response);
   }
 
   Future<void> filterByGenre(int id) async {
