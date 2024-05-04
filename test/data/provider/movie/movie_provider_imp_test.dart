@@ -19,6 +19,7 @@ void main() {
             queryParameters: {
               'api_key': AppConfig.apiKey,
               'language': AppConfig.language,
+              'page': 1,
             },
           ),
         ).thenAnswer(
@@ -33,7 +34,9 @@ void main() {
 
         final provider = MovieProviderImp(client: client);
 
-        await provider.popularMovies();
+        await provider.popularMovies(
+          page: 1,
+        );
 
         verify(
           client.get<Map<String, dynamic>>(
@@ -41,6 +44,7 @@ void main() {
             queryParameters: {
               'api_key': AppConfig.apiKey,
               'language': AppConfig.language,
+              'page': 1,
             },
           ),
         ).called(1);

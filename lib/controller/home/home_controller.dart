@@ -29,14 +29,14 @@ class HomeController extends HomeVariables {
   Future<void> init() async {
     try {
       _loading.value = true;
-      await _getGenre();
+      await getGenre();
     } catch (_) {
     } finally {
       _loading.value = false;
     }
   }
 
-  Future<void> _getGenre() async {
+  Future<void> getGenre() async {
     _loading.value = true;
     final List<GenreModel> response = await movieService.getGenre();
     _genres.assignAll(response);
