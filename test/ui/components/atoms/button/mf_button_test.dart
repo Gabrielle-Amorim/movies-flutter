@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_flutter/ui/components/atoms/atoms.dart';
+import 'package:movies_flutter/ui/theme/colors.dart';
 
 import '../../../../mocks/mock_class.mocks.dart';
 
@@ -51,7 +52,7 @@ void main() {
     group('passing all parameters', () {
       testWidgets('should has background white and width 257', (tester) async {
         Key buttonKey = const Key('testing-button');
-        Color color = Colors.white;
+        Color color = MFColors.ligthPurple;
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -70,7 +71,8 @@ void main() {
         Container container = tester.widget(finder) as Container;
 
         expect(finder, findsOneWidget);
-        expect((container.decoration as BoxDecoration).color, Colors.white);
+        expect((container.decoration as BoxDecoration).color,
+            MFColors.ligthPurple);
         expect((container.constraints as BoxConstraints).minWidth, 1000);
         expect((container.constraints as BoxConstraints).maxWidth, 1000);
       });

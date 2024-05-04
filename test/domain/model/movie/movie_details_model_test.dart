@@ -1,5 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:movies_flutter/config.dart';
 import 'package:movies_flutter/domain/model/model.dart';
+
+import '../../../mocks/mock_movies_api.dart';
 
 void main() {
   group(
@@ -70,7 +73,7 @@ void main() {
           expect(model.originalTitle, 'original_title');
           expect(model.overview, 'overview');
           expect(model.popularity, '168.876');
-          expect(model.posterPath, 'poster_path');
+          expect(model.posterPath, '${AppConfig.imagePath}poster_path');
           expect(model.companies.length, 1);
           expect(model.companies[0].name, 'name');
           expect(model.releaseDate.day, 27);
@@ -115,6 +118,16 @@ void main() {
           expect(model.video, false);
           expect(model.voteAverage, '');
           expect(model.voteCount, '');
+        },
+      );
+
+      test(
+        'should return genre',
+        () {
+          final MovieDetailsModel model =
+              MovieDetailsModel.fromMap(MockMoviesApi.movieById);
+
+          expect(model.getGenre(), 'Action / Science Fiction / Adventure');
         },
       );
     },

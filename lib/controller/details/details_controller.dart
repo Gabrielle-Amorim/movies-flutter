@@ -9,20 +9,10 @@ class DetailsController extends DetailsVariables {
 
   MovieDetailsModel get movie => _movie.value;
 
-  @override
-  void onInit() {
-    _getArgs();
-    super.onInit();
-  }
+  set movieId(String value) => _movieId.value = value;
 
-  void _getArgs() {
-    final Map args = Get.arguments;
-    _movieId.value = args['id'] ?? '';
-    _getDetails();
-  }
-
-  Future<void> _getDetails() async {
-    final MovieDetailsModel response = await movieService.getDetails(id: movieId);
+  Future<void> getDetails({id}) async {
+    final MovieDetailsModel response = await movieService.getDetails(id: id);
     _movie.value = response;
   }
 }
