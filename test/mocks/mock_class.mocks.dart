@@ -66,10 +66,12 @@ class MockMovieService extends _i1.Mock implements _i4.MovieService {
       ) as _i5.Future<List<_i2.GenreModel>>);
 
   @override
-  _i5.Future<List<_i2.MovieModel>> popularMovies() => (super.noSuchMethod(
+  _i5.Future<List<_i2.MovieModel>> popularMovies({required int? page}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #popularMovies,
           [],
+          {#page: page},
         ),
         returnValue: _i5.Future<List<_i2.MovieModel>>.value(<_i2.MovieModel>[]),
         returnValueForMissingStub:
@@ -103,6 +105,19 @@ class MockMovieService extends _i1.Mock implements _i4.MovieService {
           ),
         )),
       ) as _i5.Future<_i2.MovieDetailsModel>);
+
+  @override
+  _i5.Future<List<_i2.MovieModel>> filterByGenre({required List<int>? ids}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #filterByGenre,
+          [],
+          {#ids: ids},
+        ),
+        returnValue: _i5.Future<List<_i2.MovieModel>>.value(<_i2.MovieModel>[]),
+        returnValueForMissingStub:
+            _i5.Future<List<_i2.MovieModel>>.value(<_i2.MovieModel>[]),
+      ) as _i5.Future<List<_i2.MovieModel>>);
 }
 
 /// A class which mocks [SomeClassWithFunction].

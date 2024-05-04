@@ -11,14 +11,14 @@ void main() {
         final moviesService = MockMovieService();
 
         when(moviesService.getGenre()).thenAnswer((_) => Future.value([]));
-        when(moviesService.popularMovies()).thenAnswer((_) => Future.value([]));
+        when(moviesService.popularMovies(page: 1))
+            .thenAnswer((_) => Future.value([]));
 
         final controller = HomeController(movieService: moviesService);
 
         controller.onInit();
 
         verify(moviesService.getGenre()).called(1);
-        verify(moviesService.popularMovies()).called(1);
         expect(controller.userLogged, 'Visitante');
       });
     });
@@ -27,27 +27,30 @@ void main() {
         final moviesService = MockMovieService();
 
         when(moviesService.getGenre()).thenAnswer((_) => Future.value([]));
-        when(moviesService.popularMovies()).thenAnswer((_) => Future.value([]));
+        when(moviesService.popularMovies(page: 1))
+            .thenAnswer((_) => Future.value([]));
 
         final controller = HomeController(movieService: moviesService);
 
         await controller.init();
+        controller.movieListController.notifyPageRequestListeners(1);
 
         verify(moviesService.getGenre()).called(1);
-        verify(moviesService.popularMovies()).called(1);
+        verify(moviesService.popularMovies(page: 1)).called(1);
       });
     });
     group('getPopularMovies', () {
       test('calls moviesService.getPopularMovies', () async {
         final moviesService = MockMovieService();
 
-        when(moviesService.popularMovies()).thenAnswer((_) => Future.value([]));
+        when(moviesService.popularMovies(page: 1))
+            .thenAnswer((_) => Future.value([]));
 
         final controller = HomeController(movieService: moviesService);
 
-        await controller.getPopularMovies();
+        await controller.getPopularMovies(page: 1);
 
-        verify(moviesService.popularMovies()).called(1);
+        verify(moviesService.popularMovies(page: 1)).called(1);
         expect(controller.popularMovies, []);
         expect(controller.loading, false);
       });
@@ -64,7 +67,7 @@ void main() {
 
         verify(moviesService.getGenre()).called(1);
         expect(controller.genres, []);
-        expect(controller.loading, false);
+        expect(controller.loading, true);
       });
     });
 
