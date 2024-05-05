@@ -66,9 +66,10 @@ class DetailsScreen extends GetView<DetailsController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 200,
+                            width: MediaQuery.sizeOf(context).width * 0.45,
                             child: Text(
                               '${controller.movie.title} (${controller.movie.releaseDate.year})',
+                              overflow: TextOverflow.clip,
                               style: TextStyle(
                                 color: MFColors.white,
                                 fontSize: 20,
@@ -80,12 +81,16 @@ class DetailsScreen extends GetView<DetailsController> {
                             height: 8,
                           ),
                           controller.movie.companies.isNotEmpty
-                              ? Text(
-                                  controller.movie.companies.first.name,
-                                  style: TextStyle(
-                                    color: MFColors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                              ? SizedBox(
+                                  width: MediaQuery.sizeOf(context).width * 0.45,
+                                  child: Text(
+                                    controller.movie.companies.first.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: MFColors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
                                 )
                               : Container(),
@@ -93,7 +98,7 @@ class DetailsScreen extends GetView<DetailsController> {
                             height: 8,
                           ),
                           SizedBox(
-                            width: 200,
+                            width: MediaQuery.sizeOf(context).width * 0.45,
                             child: Text(
                               controller.movie.getGenre(),
                               style: TextStyle(
@@ -106,12 +111,15 @@ class DetailsScreen extends GetView<DetailsController> {
                           const SizedBox(
                             height: 8,
                           ),
-                          Text(
-                            'Duração: ${TimeFormat.formatTime(controller.movie.runtime)}',
-                            style: TextStyle(
-                              color: MFColors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width * 0.45,
+                            child: Text(
+                              'Duração: ${TimeFormat.formatTime(controller.movie.runtime)}',
+                              style: TextStyle(
+                                color: MFColors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ],

@@ -57,7 +57,9 @@ class MovieDetailsModel {
   factory MovieDetailsModel.fromMap(Map<String, dynamic> map) => MovieDetailsModel(
         adult: map['adult'] ?? false,
         backdropPath: map['backdrop_path'] ?? '',
-        collection: CollectionModel.fromMap(map['belongs_to_collection']),
+        collection: map['belongs_to_collection'] != null
+            ? CollectionModel.fromMap(map['belongs_to_collection'])
+            : CollectionModel.empty(),
         budget: map['budget'] ?? 0,
         genres: (map['genres'] as List? ?? [])
             .map(
