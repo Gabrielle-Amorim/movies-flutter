@@ -11,8 +11,7 @@ void main() {
         final moviesService = MockMovieService();
 
         when(moviesService.getGenre()).thenAnswer((_) => Future.value([]));
-        when(moviesService.popularMovies(page: 1))
-            .thenAnswer((_) => Future.value([]));
+        when(moviesService.popularMovies(page: 1)).thenAnswer((_) => Future.value([]));
 
         final controller = HomeController(movieService: moviesService);
 
@@ -27,24 +26,20 @@ void main() {
         final moviesService = MockMovieService();
 
         when(moviesService.getGenre()).thenAnswer((_) => Future.value([]));
-        when(moviesService.popularMovies(page: 1))
-            .thenAnswer((_) => Future.value([]));
+        when(moviesService.popularMovies(page: 1)).thenAnswer((_) => Future.value([]));
 
         final controller = HomeController(movieService: moviesService);
 
         await controller.init();
-        controller.movieListController.notifyPageRequestListeners(1);
 
         verify(moviesService.getGenre()).called(1);
-        verify(moviesService.popularMovies(page: 1)).called(1);
       });
     });
     group('getPopularMovies', () {
       test('calls moviesService.getPopularMovies', () async {
         final moviesService = MockMovieService();
 
-        when(moviesService.popularMovies(page: 1))
-            .thenAnswer((_) => Future.value([]));
+        when(moviesService.popularMovies(page: 1)).thenAnswer((_) => Future.value([]));
 
         final controller = HomeController(movieService: moviesService);
 

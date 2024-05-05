@@ -17,6 +17,7 @@ class HomeController extends HomeVariables {
   @override
   void onInit() {
     _isUserLogged();
+    _addListenerMovieList();
     init();
     super.onInit();
   }
@@ -29,7 +30,6 @@ class HomeController extends HomeVariables {
     try {
       _loading.value = true;
       await getGenre();
-      await _addListenerMovieList();
     } catch (_) {
     } finally {
       _loading.value = false;
